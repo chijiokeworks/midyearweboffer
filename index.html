@@ -285,12 +285,21 @@
 
     /* ============================================================
        SOLUTION SECTION
+       Items display as a 2-column left-right grid on desktop,
+       stacked single column on mobile.
+       Dashboard removed — list now fills the full width.
     ============================================================ */
     .solution-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center; margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2 items side by side on desktop */
+      gap: 28px 48px;
+      margin-top: 48px;
+      align-items: start;
     }
-    .solution-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .solution-list {
+      list-style: none;
+      display: contents; /* lets each <li> sit directly in the CSS grid */
+    }
     .solution-item {
       display: flex; gap: 14px; align-items: flex-start;
     }
@@ -303,24 +312,6 @@
     .solution-icon svg { width: 16px; height: 16px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .solution-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .solution-item p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
-
-    .solution-visual {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px; padding: 32px;
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .visual-row {
-      display: flex; align-items: center; gap: 12px;
-      padding: 14px 16px; background: var(--white);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      flex-wrap: wrap;
-    }
-    .visual-dot {
-      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-    }
-    .visual-row span { font-size: 14px; font-weight: 600; flex: 1; }
-    .visual-row small { font-size: 12px; color: var(--text-muted); }
 
     /* ============================================================
        DEEP VALUE SECTION
@@ -758,7 +749,8 @@
     ============================================================ */
     @media (max-width: 900px) {
       .tier-cards { grid-template-columns: 1fr; gap: 12px; }
-      .solution-grid { grid-template-columns: 1fr; gap: 40px; }
+      /* Solution items stack to single column on tablet/mobile */
+      .solution-grid { grid-template-columns: 1fr; gap: 24px; }
     }
 
     @media (max-width: 768px) {
@@ -955,82 +947,49 @@
       <h2 class="section-heading reveal reveal-delay-1">We build the system that makes your business visible, credible, and ready to capture prospects — before they move on.</h2>
       <p class="section-body reveal reveal-delay-2">This is not about running ads or going to find clients for you. It's about making sure that when the right person is already searching for what you do — your business is the one they find, trust, and reach out to.</p>
 
+      <!--
+      ══════════════════════════════════════════════════════════════
+      SOLUTION ITEMS — HOW TO UPDATE
+      These 4 items display as a 2×2 grid on desktop (left-right,
+      left-right) and stack vertically on mobile.
+      To add an item: duplicate a .solution-item block inside the grid.
+      To remove: delete the full .solution-item block.
+      To edit: update the <h4> headline and <p> paragraph text.
+      ══════════════════════════════════════════════════════════════
+      -->
       <div class="solution-grid">
 
-        <ul class="solution-list">
-
-          <!--
-          ══════════════════════════════════════════════
-          SOLUTION ITEMS — HOW TO UPDATE
-          Edit the h4 and p text inside each .solution-item.
-          To add an item: duplicate a .solution-item block.
-          To remove: delete the full .solution-item block.
-          ══════════════════════════════════════════════
-          -->
-
-          <li class="solution-item reveal reveal-delay-1">
+          <div class="solution-item reveal reveal-delay-1">
             <div class="solution-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
             <div>
               <h4>Searching prospects can find you</h4>
               <p>We build your online presence so that when someone in your city searches for what you offer, your business actually shows up — not buried, not absent.</p>
             </div>
-          </li>
+          </div>
 
-          <li class="solution-item reveal reveal-delay-2">
+          <div class="solution-item reveal reveal-delay-2">
             <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
             <div>
               <h4>When they land, there's a clear way in</h4>
               <p>Every page, every button, every message is built with one goal — making it easy and compelling for a prospect to reach out. No confusion. No friction. No dead ends.</p>
             </div>
-          </li>
+          </div>
 
-          <li class="solution-item reveal reveal-delay-3">
+          <div class="solution-item reveal reveal-delay-2">
             <div class="solution-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             <div>
               <h4>Enquiries get captured — not lost</h4>
               <p>Built-in lead capture means every person who shows interest is caught and recorded. No more relying on memory or inbox searches to follow up on warm prospects.</p>
             </div>
-          </li>
+          </div>
 
-          <li class="solution-item reveal reveal-delay-3">
+          <div class="solution-item reveal reveal-delay-3">
             <div class="solution-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
             <div>
               <h4>Your message is consistent everywhere</h4>
               <p>We align how your business speaks — on your website, on your social pages, and in every touchpoint — so every prospect gets the same clear, compelling story about who you are and why you.</p>
             </div>
-          </li>
-
-        </ul>
-
-        <!-- Visual mock dashboard -->
-        <div class="solution-visual reveal reveal-delay-2">
-          <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;">Your Business Pipeline</div>
-          <div class="visual-row">
-            <div class="visual-dot" style="background:#22c55e;"></div>
-            <span>New enquiry received</span>
-            <small>Just now</small>
           </div>
-          <div class="visual-row">
-            <div class="visual-dot" style="background:#3b82f6;"></div>
-            <span>Auto-reply sent to lead</span>
-            <small>Just now</small>
-          </div>
-          <div class="visual-row">
-            <div class="visual-dot" style="background:#f59e0b;"></div>
-            <span>Follow-up scheduled</span>
-            <small>In 24hrs</small>
-          </div>
-          <div class="visual-row">
-            <div class="visual-dot" style="background:#22c55e;"></div>
-            <span>Client onboarded</span>
-            <small>Today</small>
-          </div>
-          <div style="margin-top:8px; padding:14px 16px; background:var(--orange-light); border-radius:var(--radius); border:1px solid rgba(232,51,10,0.2);">
-            <div style="font-size:11px; color:var(--orange); font-weight:700; margin-bottom:4px;">THIS MONTH</div>
-            <div style="font-size:22px; font-weight:800; color:var(--text);">12 new leads captured</div>
-            <div style="font-size:13px; color:var(--text-muted); margin-top:2px;">All while you focused on delivery</div>
-          </div>
-        </div>
 
       </div>
     </div>
@@ -1081,98 +1040,12 @@
 
   <hr class="divider" />
 
-  <section class="section" id="deep-value">
-    <div class="section-inner">
-      <p class="section-label reveal">What You're Actually Getting</p>
-      <h2 class="section-heading reveal reveal-delay-1">Three tiers. One goal — make your business impossible to overlook online.</h2>
-
-      <p class="value-intro reveal reveal-delay-2">
-        Depending on the tier you choose, the depth of what we build increases. But every tier starts with the same foundation — <strong>a properly built online presence that captures the prospects already searching for what you do.</strong>
-      </p>
-
-      <!--
-      ══════════════════════════════════════════════════════════════
-      TIER CARDS — HOW TO UPDATE
-      - Update .tier-badge text (tier name)
-      - Update the h3 headline
-      - Add, edit, or remove list items inside .tier-features
-      - Each <li> is one deliverable — edit the text directly
-      - To add a deliverable: duplicate an <li> and edit the text
-      - To remove a deliverable: delete the full <li> line
-      - To add a tier: duplicate a full .tier-card block
-      - To remove a tier: delete the full .tier-card block
-      ══════════════════════════════════════════════════════════════
-      -->
-      <div class="tier-cards">
-
-        <!-- TIER 1 CARD — update badge, headline, and list items below -->
-        <div class="tier-card reveal reveal-delay-1">
-          <div class="tier-badge">Tier 1 · Online Presence System</div>
-          <h3>Get found. Get seen. Get contacted.</h3>
-          <ul class="tier-features">
-            <!--  ── UPDATE TIER 1 DELIVERABLES ── -->
-            <li>1 to 2 page website — mobile optimised and built to capture enquiries</li>
-            <li>Enquiry and lead capture form built directly into the site</li>
-            <li>WhatsApp CTA integration — one tap for prospects to reach you</li>
-            <li>Basic on-page SEO setup</li>
-            <li>Basic brand messaging optimisation — so the words on your site speak to the right people</li>
-            <li>Domain name registration — 1 year</li>
-            <li>Website hosting — 1 year</li>
-            <li>SSL certificate — 1 year</li>
-          </ul>
-        </div>
-
-        <!-- TIER 2 CARD — update badge, headline, and list items below -->
-        <div class="tier-card reveal reveal-delay-2">
-          <div class="tier-badge">Tier 2 · Visibility & Discovery System</div>
-          <h3>Be found in more places by the right people.</h3>
-          <ul class="tier-features">
-            <!--  ── UPDATE TIER 2 DELIVERABLES ── -->
-            <li>Everything in Tier 1 — plus deeper strategy layers</li>
-            <li>Multi-page website — up to 3 to 5 pages built as a lead capture machine</li>
-            <li>Google Business Profile setup and optimisation</li>
-            <li>Local SEO setup — show up when people in your city search for what you do</li>
-            <li>Social media profile audit and alignment</li>
-            <li>Intermediate brand messaging optimisation</li>
-            <li>Basic client acquisition channel recommendations — we identify the platforms most relevant to your business model</li>
-          </ul>
-        </div>
-
-        <!-- TIER 3 CARD — update badge, headline, and list items below -->
-        <div class="tier-card reveal reveal-delay-3">
-          <div class="tier-badge">Tier 3 · Full Client Acquisition System</div>
-          <h3>A system that captures, responds, and follows up — so no warm lead ever slips away.</h3>
-          <ul class="tier-features">
-            <!--  ── UPDATE TIER 3 DELIVERABLES ── -->
-            <li>Everything in Tier 1 and Tier 2 — the complete build</li>
-            <li>Full multi-page website engineered as a lead capture machine</li>
-            <li>Automated lead capture — instant response triggered the moment someone enquires</li>
-            <li>Basic automated follow-up sequence — 24 and 48 hour triggers so leads don't go cold</li>
-            <li>Mini CRM pipeline view — a simple dashboard so you always know where every lead stands</li>
-            <li>Executive brand messaging framework — the exact words to use on your site, social pages, and in sales conversations</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="deep-value-cta reveal reveal-delay-3">
-        <!--
-        ══════════════════════════════════════════════════
-        DEEP VALUE CTA BUTTON — update text below.
-        This opens the application form modal.
-        ══════════════════════════════════════════════════
-        -->
-        <button class="btn-main btn-trigger" onclick="openModal()" style="margin-top:40px; width:100%; max-width:420px;">
-          Find Out Which Tier Fits Your Business →
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
   <!-- ============================================================
        SOCIAL PROOF — TESTIMONIALS
+       Placed here — directly after the slot+price warm-up —
+       so trust is built BEFORE the reader reaches the tier details.
+       Section order: What We Build → Slot+Price → Testimonials →
+       What You're Actually Getting → Mid Slot → Pricing → Final CTA
   ============================================================ -->
   <section class="section" id="proof">
     <div class="section-inner">
@@ -1394,9 +1267,103 @@
   <hr class="divider" />
 
   <!-- ============================================================
-       MID-PAGE SLOT AVAILABILITY — SECOND INSTANCE
-       Appears after social proof to reinforce urgency.
-       Automatically synced to the same SLOTS_TAKEN value in the script.
+       DEEP VALUE SECTION — "What You're Actually Getting"
+  ============================================================ -->
+  <section class="section" id="deep-value">
+    <div class="section-inner">
+      <p class="section-label reveal">What You're Actually Getting</p>
+      <h2 class="section-heading reveal reveal-delay-1">Three tiers. One goal — make your business impossible to overlook online.</h2>
+
+      <p class="value-intro reveal reveal-delay-2">
+        Depending on the tier you choose, the depth of what we build increases. But every tier starts with the same foundation — <strong>a properly built online presence that captures the prospects already searching for what you do.</strong>
+      </p>
+
+      <!--
+      ══════════════════════════════════════════════════════════════
+      TIER CARDS — HOW TO UPDATE
+      - Update .tier-badge text (tier name)
+      - Update the h3 headline
+      - Add, edit, or remove list items inside .tier-features
+      - Each <li> is one deliverable — edit the text directly
+      - To add a deliverable: duplicate an <li> and edit the text
+      - To remove a deliverable: delete the full <li> line
+      - To add a tier: duplicate a full .tier-card block
+      - To remove a tier: delete the full .tier-card block
+      ══════════════════════════════════════════════════════════════
+      -->
+      <div class="tier-cards">
+
+        <!-- TIER 1 CARD — update badge, headline, and list items below -->
+        <div class="tier-card reveal reveal-delay-1">
+          <div class="tier-badge">Tier 1 · Online Presence System</div>
+          <h3>Get found. Get seen. Get contacted.</h3>
+          <ul class="tier-features">
+            <!--  ── UPDATE TIER 1 DELIVERABLES ── -->
+            <li>1 to 2 page website — mobile optimised and built to capture enquiries</li>
+            <li>Enquiry and lead capture form built directly into the site</li>
+            <li>WhatsApp CTA integration — one tap for prospects to reach you</li>
+            <li>Basic on-page SEO setup</li>
+            <li>Basic brand messaging optimisation — so the words on your site speak to the right people</li>
+            <li>Domain name registration — 1 year</li>
+            <li>Website hosting — 1 year</li>
+            <li>SSL certificate — 1 year</li>
+          </ul>
+        </div>
+
+        <!-- TIER 2 CARD — update badge, headline, and list items below -->
+        <div class="tier-card reveal reveal-delay-2">
+          <div class="tier-badge">Tier 2 · Visibility & Discovery System</div>
+          <h3>Be found in more places by the right people.</h3>
+          <ul class="tier-features">
+            <!--  ── UPDATE TIER 2 DELIVERABLES ── -->
+            <li>Everything in Tier 1 — plus deeper strategy layers</li>
+            <li>Multi-page website — up to 3 to 5 pages built as a lead capture machine</li>
+            <li>Google Business Profile setup and optimisation</li>
+            <li>Local SEO setup — show up when people in your city search for what you do</li>
+            <li>Social media profile audit and alignment</li>
+            <li>Intermediate brand messaging optimisation</li>
+            <li>Basic client acquisition channel recommendations — we identify the platforms most relevant to your business model</li>
+          </ul>
+        </div>
+
+        <!-- TIER 3 CARD — update badge, headline, and list items below -->
+        <div class="tier-card reveal reveal-delay-3">
+          <div class="tier-badge">Tier 3 · Full Client Acquisition System</div>
+          <h3>A system that captures, responds, and follows up — so no warm lead ever slips away.</h3>
+          <ul class="tier-features">
+            <!--  ── UPDATE TIER 3 DELIVERABLES ── -->
+            <li>Everything in Tier 1 and Tier 2 — the complete build</li>
+            <li>Full multi-page website engineered as a lead capture machine</li>
+            <li>Automated lead capture — instant response triggered the moment someone enquires</li>
+            <li>Basic automated follow-up sequence — 24 and 48 hour triggers so leads don't go cold</li>
+            <li>Mini CRM pipeline view — a simple dashboard so you always know where every lead stands</li>
+            <li>Executive brand messaging framework — the exact words to use on your site, social pages, and in sales conversations</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="deep-value-cta reveal reveal-delay-3">
+        <!--
+        ══════════════════════════════════════════════════
+        DEEP VALUE CTA BUTTON — update text below.
+        This opens the application form modal.
+        ══════════════════════════════════════════════════
+        -->
+        <button class="btn-main btn-trigger" onclick="openModal()" style="margin-top:40px; width:100%; max-width:420px;">
+          Find Out Which Tier Fits Your Business →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ============================================================
+       MID-PAGE SLOT AVAILABILITY
+       Appears after testimonials and deep-value tiers to reinforce
+       urgency before the reader reaches the full pricing section.
+       Automatically synced to SLOTS_TAKEN in the script.
   ============================================================ -->
   <section class="section" style="padding: 40px 40px; background: var(--surface);">
     <div class="section-inner" style="display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;">
