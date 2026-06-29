@@ -838,9 +838,7 @@
     To resize: edit .nav-logo-img { height: 36px; } in the CSS above.
     ══════════════════════════════════════════════════
     -->
-    <div class="nav-logo-text">
-      BRAVODA <span class="badge">STUDIOS</span>
-    </div>
+    <img src="Bravoda widelock web logo white bg@4x-8.png" alt="Bravoda Studios" class="nav-logo-img" />
 
     <button class="nav-cta btn-trigger" onclick="openModal()">
       <!--  ── UPDATE NAV CTA TEXT ── -->
@@ -1703,26 +1701,68 @@
        TOTAL_SLOTS    → total slots available for this campaign
        WHATSAPP_NUM   → your WhatsApp number (country code + number, no +)
        WHATSAPP_MSG   → pre-filled message sent when form is submitted
-       FORM_ENDPOINT  → your Google Apps Script URL for Google Sheets
+       W3F_ACCESS_KEY → your Web3Forms access key (email notifications)
+       FORM_ENDPOINT  → your Google Apps Script URL (Google Sheets logging)
     ══════════════════════════════════════════════════════════════ */
 
     const SLOTS_TAKEN  = 3;          // ← UPDATE THIS when a slot is filled
     const TOTAL_SLOTS  = 12;         // ← total slots for this campaign
 
     // ── WHATSAPP NUMBER — replace with your number ──
-    const WHATSAPP_NUM = "234XXXXXXXXXX";  // ← REPLACE WITH YOUR NUMBER
+    const WHATSAPP_NUM = "2347086212765";  // ← REPLACE WITH YOUR NUMBER
 
     // ── WHATSAPP PRE-FILLED MESSAGE — update if needed ──
     const WHATSAPP_MSG = "Hi Bravoda Studios, I just applied for the Client Acquisition System offer and I'd like to continue the conversation.";
 
-    // ── GOOGLE APPS SCRIPT URL ──
-    // Steps to set up:
-    // 1. Open Google Sheets and create a new spreadsheet
-    // 2. Go to Extensions → Apps Script
-    // 3. Paste the doPost(e) script that logs form data to the sheet
-    // 4. Deploy as Web App → Anyone can access
-    // 5. Copy the deployment URL and paste it below
-    const FORM_ENDPOINT = "https://script.google.com/macros/s/XXXXXXXXXX/exec"; // ← PASTE YOUR URL HERE
+    // ── WEB3FORMS ACCESS KEY ──
+    // PURPOSE: Sends an email notification to YOU every time the form is submitted.
+    // HOW TO GET YOUR KEY:
+    //   1. Go to https://web3forms.com
+    //   2. Enter your email address and click "Create Access Key"
+    //   3. Check your email and confirm it
+    //   4. Copy the Access Key shown on screen
+    //   5. Paste it below, replacing the XXXXXXXXXX placeholder
+    const W3F_ACCESS_KEY = "00262fed-66d3-424a-8965-a16dd198e6ba"; // ← PASTE YOUR WEB3FORMS ACCESS KEY HERE
+
+    // ── GOOGLE APPS SCRIPT URL (Google Sheets) ──
+    // PURPOSE: Logs every form submission as a new row in your Google Sheet.
+    // HOW TO SET IT UP:
+    //   1. Go to sheets.google.com and create a new spreadsheet
+    //   2. In Row 1, add column headers matching your form fields, e.g:
+    //        name | email | phone | business_type | submitted_at
+    //      (use the exact field "name" attributes from your form inputs)
+    //   3. In the spreadsheet, go to Extensions → Apps Script
+    //   4. Delete any default code and paste the doPost(e) function below:
+    //
+    //      function doPost(e) {
+    //        try {
+    //          var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    //          var data  = JSON.parse(e.postData.contents);
+    //          sheet.appendRow([
+    //            data.name          || '',
+    //            data.email         || '',
+    //            data.phone         || '',
+    //            data.business_type || '',
+    //            data.submitted_at  || ''
+    //          ]);
+    //          return ContentService
+    //            .createTextOutput(JSON.stringify({ status: 'success' }))
+    //            .setMimeType(ContentService.MimeType.JSON);
+    //        } catch(err) {
+    //          return ContentService
+    //            .createTextOutput(JSON.stringify({ status: 'error', message: err.toString() }))
+    //            .setMimeType(ContentService.MimeType.JSON);
+    //        }
+    //      }
+    //
+    //   5. Click Deploy → New Deployment
+    //   6. Click the gear ⚙ next to "Select type" → choose Web App
+    //   7. Set "Execute as" → Me | "Who has access" → Anyone
+    //   8. Click Deploy and copy the Web App URL it gives you
+    //   9. Paste that URL below, replacing the XXXXXXXXXX placeholder
+    //
+    // NOTE: Update the appendRow() field order above to match your sheet columns.
+    const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxON-UK28hdTd-jkErJj5MoomOHGJ5lojAWHy62d-Yp_jU885w_oHzEdPN_Siac2_dI/exec"; // ← PASTE YOUR APPS SCRIPT URL HERE
 
     /* ══════════════════════════════════════════════════════════════
        SLOT COUNTER — renders all three dashboards automatically
@@ -1811,44 +1851,64 @@
 
     /* ══════════════════════════════════════════════════════════════
        FORM SUBMISSION
-       1. Collects all form data
-       2. Sends to Google Sheets via Apps Script
-       3. Redirects to WhatsApp with pre-filled message
+       Flow (zero lag for the user):
+       1. User hits Submit
+       2. Form hides instantly → checkmark flashes on screen
+       3. TWO background requests fire simultaneously (fire-and-forget):
+            → Web3Forms  : emails the submission to you
+            → Apps Script: logs a new row in your Google Sheet
+       4. WhatsApp opens after a brief checkmark display (800ms)
+       Neither background request blocks or delays the redirect.
     ══════════════════════════════════════════════════════════════ */
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
       e.preventDefault();
 
-      var btn = document.getElementById('modalSubmitBtn');
-      btn.textContent = 'Submitting...';
-      btn.disabled = true;
-
-      var form = document.getElementById('applicationForm');
-      var data = new FormData(form);
+      // Collect form data
+      var form    = document.getElementById('applicationForm');
+      var data    = new FormData(form);
       var payload = {};
       data.forEach(function(val, key) { payload[key] = val; });
       payload.submitted_at = new Date().toISOString();
 
+      // Build WhatsApp URL
       var waURL = 'https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(WHATSAPP_MSG);
-
       document.getElementById('waFallbackBtn').href = waURL;
 
+      // ── STEP 1: Show checkmark instantly — zero wait for the user ──
+      document.getElementById('modalFormView').style.display = 'none';
+      document.getElementById('modalSuccess').style.display  = 'block';
+
+      // ── STEP 2: Fire both data submissions in the background ──
+      // Neither of these is awaited — they run silently behind the scenes
+      // while the user is already seeing the success screen and heading to WhatsApp.
+
+      // SEND A — Web3Forms (email notification to you)
+      // No changes needed here. Update W3F_ACCESS_KEY in the config above.
+      try {
+        fetch('https://api.web3forms.com/submit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body:    JSON.stringify(Object.assign({ access_key: W3F_ACCESS_KEY }, payload))
+        });
+      } catch (err) { console.warn('[Web3Forms] submission error:', err); }
+
+      // SEND B — Google Apps Script (logs row to Google Sheet)
+      // No changes needed here. Update FORM_ENDPOINT in the config above.
       try {
         fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
+          method:  'POST',
+          mode:    'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body:    JSON.stringify(payload)
         });
-      } catch (err) {
-        console.warn('Form submission error:', err);
-      }
+      } catch (err) { console.warn('[Apps Script] submission error:', err); }
 
-      document.getElementById('modalFormView').style.display = 'none';
-      document.getElementById('modalSuccess').style.display = 'block';
-
+      // ── STEP 3: Redirect to WhatsApp after checkmark displays briefly ──
+      // 800ms gives just enough time for the ✓ to register before redirect.
+      // Do NOT increase this delay — it causes drop-offs.
       setTimeout(function() {
         window.open(waURL, '_blank');
-      }, 1200);
+      }, 800);
     }
 
     /* ══════════════════════════════════════════════════════════════
