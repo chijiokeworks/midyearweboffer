@@ -4,7 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff" />
-  <title>Bravoda Studios — Client Acquisition System</title>
+  <title>Bravoda Studios - Client Acquisition System</title>
+
+  <!-- ============================================================
+       META PIXEL (FACEBOOK / INSTAGRAM ADS TRACKING)
+
+       HOW TO ADD YOUR PIXEL ID:
+       1. Go to your Meta Ads Manager / Events Manager
+       2. Find your Pixel ID (a long number, e.g. 1234567890123456)
+       3. Paste that number into BOTH places marked
+          YOUR_PIXEL_ID_HERE below (the script and the noscript img)
+       4. Do this BEFORE you start running ads, so tracking is live
+          from day one of the campaign.
+
+       WHAT THIS TRACKS AUTOMATICALLY:
+       - PageView: fires every time someone loads this page
+       - Lead: fires only when someone successfully submits the
+         application form (this is counted as a real lead, not a
+         button click). This is wired up further down in the
+         JavaScript inside the form submit handler.
+  ============================================================ -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    /* ── PASTE YOUR META PIXEL ID BELOW (replace YOUR_PIXEL_ID_HERE) ── */
+    fbq('init', 'YOUR_PIXEL_ID_HERE');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"
+    />
+  </noscript>
+  <!-- END META PIXEL -->
+
   <style>
 
     /* ============================================================
@@ -852,7 +892,7 @@
 
       <p class="hero-sub reveal reveal-delay-1">
         <!--  ── UPDATE HERO SUBHEADLINE ── -->
-        The question is — when they find you, will what they see convince them to reach out? Or will they keep scrolling and call your competitor instead?
+        The question is, when they find you, will what they see convince them to reach out? Or will they keep scrolling and call your competitor instead?
       </p>
 
       <div class="hero-actions reveal reveal-delay-2">
@@ -865,7 +905,7 @@
         ══════════════════════════════════════════════════
         -->
         <button class="btn-main" onclick="document.getElementById('problem').scrollIntoView({behavior:'smooth'})">
-          Learn More — See If This Is For You ↓
+          Learn More, See If This Is For You ↓
         </button>
       </div>
 
@@ -917,19 +957,19 @@
         <div class="problem-card reveal reveal-delay-1">
           <div class="problem-number">01</div>
           <h3>They can't find you</h3>
-          <p>Right now, someone in your city is searching for exactly what you offer. They're not finding you. They're finding whoever built a better system to be discovered — and that business is getting the sale you should have had.</p>
+          <p>Right now, someone in your city is searching for exactly what you offer. They're not finding you. They're finding whoever built a better system to be discovered, and that business is getting the sale you should have had.</p>
         </div>
 
         <div class="problem-card reveal reveal-delay-2">
           <div class="problem-number">02</div>
-          <h3>They find you — but there's no way in</h3>
+          <h3>They find you, but there's no way in</h3>
           <p>Even when a prospect lands on your page, there's no clear path to reach you. No capture system. No compelling reason to stay. They look around for thirty seconds, find nothing convincing, and leave without ever making contact.</p>
         </div>
 
         <div class="problem-card reveal reveal-delay-3">
           <div class="problem-number">03</div>
           <h3>Interested leads go cold and disappear</h3>
-          <p>Someone shows interest — they DM you, visit your page, maybe even tap your number. Then life happens and you never follow up in time. Without a system catching and responding to those moments automatically, that money walks out the door every single week.</p>
+          <p>Someone shows interest, they DM you, visit your page, maybe even tap your number. Then life happens and you never follow up in time. Without a system catching and responding to those moments automatically, that money walks out the door every single week.</p>
         </div>
 
       </div>
@@ -944,8 +984,8 @@
   <section class="section" id="solution">
     <div class="section-inner">
       <p class="section-label reveal">What We Build</p>
-      <h2 class="section-heading reveal reveal-delay-1">We build the system that makes your business visible, credible, and ready to capture prospects — before they move on.</h2>
-      <p class="section-body reveal reveal-delay-2">This is not about running ads or going to find clients for you. It's about making sure that when the right person is already searching for what you do — your business is the one they find, trust, and reach out to.</p>
+      <h2 class="section-heading reveal reveal-delay-1">We build the system that makes your business visible, credible, and ready to capture prospects before they move on.</h2>
+      <p class="section-body reveal reveal-delay-2">This is not about running ads or going to find clients for you. It's about making sure that when the right person is already searching for what you do, your business is the one they find, trust, and reach out to.</p>
 
       <!--
       ══════════════════════════════════════════════════════════════
@@ -963,7 +1003,7 @@
             <div class="solution-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
             <div>
               <h4>Searching prospects can find you</h4>
-              <p>We build your online presence so that when someone in your city searches for what you offer, your business actually shows up — not buried, not absent.</p>
+              <p>We build your online presence so that when someone in your city searches for what you offer, your business actually shows up, not buried, not absent.</p>
             </div>
           </div>
 
@@ -971,14 +1011,14 @@
             <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
             <div>
               <h4>When they land, there's a clear way in</h4>
-              <p>Every page, every button, every message is built with one goal — making it easy and compelling for a prospect to reach out. No confusion. No friction. No dead ends.</p>
+              <p>Every page, every button, every message is built with one goal: making it easy and compelling for a prospect to reach out. No confusion. No friction. No dead ends.</p>
             </div>
           </div>
 
           <div class="solution-item reveal reveal-delay-2">
             <div class="solution-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             <div>
-              <h4>Enquiries get captured — not lost</h4>
+              <h4>Enquiries get captured, not lost</h4>
               <p>Built-in lead capture means every person who shows interest is caught and recorded. No more relying on memory or inbox searches to follow up on warm prospects.</p>
             </div>
           </div>
@@ -987,7 +1027,7 @@
             <div class="solution-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
             <div>
               <h4>Your message is consistent everywhere</h4>
-              <p>We align how your business speaks — on your website, on your social pages, and in every touchpoint — so every prospect gets the same clear, compelling story about who you are and why you.</p>
+              <p>We align how your business speaks on your website, on your social pages, and in every touchpoint, so every prospect gets the same clear, compelling story about who you are and why you.</p>
             </div>
           </div>
 
@@ -1266,10 +1306,10 @@
   <section class="section" id="deep-value">
     <div class="section-inner">
       <p class="section-label reveal">What You're Actually Getting</p>
-      <h2 class="section-heading reveal reveal-delay-1">Three tiers. One goal — make your business impossible to overlook online.</h2>
+      <h2 class="section-heading reveal reveal-delay-1">Three tiers. One goal: make your business impossible to overlook online.</h2>
 
       <p class="value-intro reveal reveal-delay-2">
-        Depending on the tier you choose, the depth of what we build increases. But every tier starts with the same foundation — <strong>a properly built online presence that captures the prospects already searching for what you do.</strong>
+        Depending on the tier you choose, the depth of what we build increases. But every tier starts with the same foundation: <strong>a properly built online presence that captures the prospects already searching for what you do.</strong>
       </p>
 
       <!--
@@ -1293,14 +1333,14 @@
           <h3>Get found. Get seen. Get contacted.</h3>
           <ul class="tier-features">
             <!--  ── UPDATE TIER 1 DELIVERABLES ── -->
-            <li>1 to 2 page website — mobile optimised and built to capture enquiries</li>
+            <li>1 to 2 page website, mobile optimised and built to capture enquiries</li>
             <li>Enquiry and lead capture form built directly into the site</li>
-            <li>WhatsApp CTA integration — one tap for prospects to reach you</li>
+            <li>WhatsApp CTA integration, one tap for prospects to reach you</li>
             <li>Basic on-page SEO setup</li>
-            <li>Basic brand messaging optimisation — so the words on your site speak to the right people</li>
-            <li>Domain name registration — 1 year</li>
-            <li>Website hosting — 1 year</li>
-            <li>SSL certificate — 1 year</li>
+            <li>Basic brand messaging optimisation, so the words on your site speak to the right people</li>
+            <li>Domain name registration (1 year)</li>
+            <li>Website hosting (1 year)</li>
+            <li>SSL certificate (1 year)</li>
           </ul>
         </div>
 
@@ -1310,28 +1350,28 @@
           <h3>Be found in more places by the right people.</h3>
           <ul class="tier-features">
             <!--  ── UPDATE TIER 2 DELIVERABLES ── -->
-            <li>Everything in Tier 1 — plus deeper strategy layers</li>
-            <li>Multi-page website — up to 3 to 5 pages built as a lead capture machine</li>
+            <li>Everything in Tier 1, plus deeper strategy layers</li>
+            <li>Multi-page website, up to 3 to 5 pages built as a lead capture machine</li>
             <li>Google Business Profile setup and optimisation</li>
-            <li>Local SEO setup — show up when people in your city search for what you do</li>
+            <li>Local SEO setup, show up when people in your city search for what you do</li>
             <li>Social media profile audit and alignment</li>
             <li>Intermediate brand messaging optimisation</li>
-            <li>Basic client acquisition channel recommendations — we identify the platforms most relevant to your business model</li>
+            <li>Basic client acquisition channel recommendations, we identify the platforms most relevant to your business model</li>
           </ul>
         </div>
 
         <!-- TIER 3 CARD — update badge, headline, and list items below -->
         <div class="tier-card reveal reveal-delay-3">
           <div class="tier-badge">Tier 3 · Full Client Acquisition System</div>
-          <h3>A system that captures, responds, and follows up — so no warm lead ever slips away.</h3>
+          <h3>A system that captures, responds, and follows up, so no warm lead ever slips away.</h3>
           <ul class="tier-features">
             <!--  ── UPDATE TIER 3 DELIVERABLES ── -->
-            <li>Everything in Tier 1 and Tier 2 — the complete build</li>
+            <li>Everything in Tier 1 and Tier 2, the complete build</li>
             <li>Full multi-page website engineered as a lead capture machine</li>
-            <li>Automated lead capture — instant response triggered the moment someone enquires</li>
-            <li>Basic automated follow-up sequence — 24 and 48 hour triggers so leads don't go cold</li>
-            <li>Mini CRM pipeline view — a simple dashboard so you always know where every lead stands</li>
-            <li>Executive brand messaging framework — the exact words to use on your site, social pages, and in sales conversations</li>
+            <li>Automated lead capture, instant response triggered the moment someone enquires</li>
+            <li>Basic automated follow-up sequence, 24 and 48 hour triggers so leads don't go cold</li>
+            <li>Mini CRM pipeline view, a simple dashboard so you always know where every lead stands</li>
+            <li>Executive brand messaging framework, the exact words to use on your site, social pages, and in sales conversations</li>
           </ul>
         </div>
 
@@ -1362,7 +1402,7 @@
   <section class="section" style="padding: 40px 40px; background: var(--surface);">
     <div class="section-inner" style="display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;">
       <p style="font-size:15px; color:var(--text-muted); max-width:460px; line-height:1.7;">
-        We only work with a small number of businesses at a time — so every client gets our full attention and best work. These slots fill up.
+        We only work with a small number of businesses at a time, so every client gets our full attention and best work. These slots fill up.
       </p>
       <div class="slot-inline">
         <div class="slot-dashboard-header">
@@ -1391,7 +1431,7 @@
     <div class="section-inner" style="text-align:center;">
       <p class="section-label reveal">Investment</p>
       <h2 class="section-heading reveal reveal-delay-1" style="margin:0 auto 16px;">Built around your business. Priced for where you are right now.</h2>
-      <p class="section-body reveal reveal-delay-2" style="margin:0 auto 36px;">Three tiers available — each one goes deeper than the last. We'll listen to your situation and recommend the right fit after a short conversation. No pressure. No pitch.</p>
+      <p class="section-body reveal reveal-delay-2" style="margin:0 auto 36px;">Three tiers available, each one goes deeper than the last. We'll listen to your situation and recommend the right fit after a short conversation. No pressure. No pitch.</p>
 
       <!--
       ══════════════════════════════════════════════════
@@ -1436,7 +1476,7 @@
 
       <button class="btn-main btn-trigger reveal reveal-delay-3" onclick="openModal()" style="margin:0 auto;">
         <!--  ── UPDATE PRICING CTA TEXT ── -->
-        Apply Now — Check If You Qualify →
+        Apply Now, Check If You Qualify →
       </button>
     </div>
   </section>
@@ -1455,7 +1495,7 @@
       </h2>
       <p class="section-body reveal reveal-delay-2">
         <!--  ── UPDATE FINAL CTA SUBTEXT ── -->
-        We are only opening this to 12 businesses. Once those slots are filled, this offer closes. If you've been thinking about getting your online presence properly sorted — this is the time.
+        We are only opening this to 12 businesses. Once those slots are filled, this offer closes. If you've been thinking about getting your online presence properly sorted, this is the time.
       </p>
       <div style="margin-top:32px;" class="reveal reveal-delay-3">
         <button class="btn-main btn-trigger" onclick="openModal()">
@@ -1573,7 +1613,7 @@
             <label for="q_challenge">What is your biggest challenge getting clients online right now? *</label>
             <textarea
               id="q_challenge" name="challenge"
-              placeholder="Be as specific as possible — this helps us understand how to help you."
+              placeholder="Be as specific as possible, this helps us understand how to help you."
               required
             ></textarea>
           </div>
@@ -1612,7 +1652,7 @@
               </label>
               <label class="radio-option">
                 <input type="radio" name="ready_to_start" value="no" />
-                <span class="radio-option-text">Not yet — still exploring</span>
+                <span class="radio-option-text">Not yet, still exploring</span>
               </label>
             </div>
           </div>
@@ -1838,6 +1878,14 @@
       // ── STEP 1: Show checkmark instantly — zero wait for the user ──
       document.getElementById('modalFormView').style.display = 'none';
       document.getElementById('modalSuccess').style.display  = 'block';
+
+      // ── META PIXEL: track this as a Lead ──
+      // This fires only here, on a successful form submission.
+      // Button clicks (like opening the modal) do NOT count as a Lead,
+      // only an actual completed application does.
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead');
+      }
 
       // ── STEP 2: Fire both data submissions in the background ──
       // Neither of these is awaited — they run silently behind the scenes
